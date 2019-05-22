@@ -18,7 +18,8 @@ plt.ion()
 fig = plt.figure()
 ax1 = fig.add_subplot(1,1,1)
 
-times = [time.ctime()]
+timeNow = time.time()
+times = [time.ctime(timeNow-(timeNow%300))]
 peoples = [0]
 plt.plot(times,peoples)
 
@@ -39,14 +40,9 @@ class TestApp(App):
         box.add_widget(self.innum)
         box.add_widget(inbutton)
         return box
-    def inp(self, instance):
-        times.append(time.ctime())
-        p = input("Kolik?")
-        peoples.append(int(p))
-        ax1.clear()
-        ax1.plot(times, peoples)
     def on_enter(self,instance, value = 5):
-        times.append(time.ctime())
+        timeNow = time.time()
+        times.append(time.ctime(timeNow-(timeNow%300)))
         p = self.innum.text
         peoples.append(int(p))
         ax1.clear()
